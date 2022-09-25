@@ -7,6 +7,7 @@ export default async function Fetcher(...args) {
       method: "GET",
       headers: {
         // update with your user-agent
+        'Content-Type': 'application/json',
         "User-Agent": "*", 
         Accept: "application/json; charset=UTF-8",
       }
