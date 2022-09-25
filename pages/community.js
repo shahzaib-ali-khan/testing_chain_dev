@@ -4,6 +4,8 @@ import loadTweets from '../utils/loadTweets';
 import dynamic from 'next/dynamic';
 import fetch from '../utils/fetcher';
 import { Container } from '../components/layout';
+import { loadPinnedTweet } from "../lib/load-pinned-tweet";
+import { loadNewsletter } from "../lib/load-newsletter";
 
 const Sidebar = dynamic(() => import('../components/sidebar'));
 const Spinner = dynamic(() => import('../components/spinner'));
@@ -15,10 +17,9 @@ function classNames(...classes) {
 }
 
 export async function getStaticProps() {
-  const tweets = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/tweets/pinned`);
-  const latestNewsletter = await fetch(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`
-  );
+  
+  const tweets = await loadPinnedTweet();
+  const latestNewsletter = await loadNewsletter();
 
   return {
     props: { tweets, latestNewsletter: latestNewsletter[0] },

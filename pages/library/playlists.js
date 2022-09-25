@@ -1,13 +1,12 @@
 import fetcher from "../../utils/fetcher";
 import dynamic from "next/dynamic";
 import { Container } from "../../components/layout";
+import { loadPlaylist } from "../../lib/load-playlist";
 
 const Playlists = dynamic(() => import("../../components/videos/playlists"));
 
 export async function getStaticProps() {
-  const playlists = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/playlists/bnb`
-  );
+  const playlists = await loadPlaylist();
 
   return {
     props: { playlists },

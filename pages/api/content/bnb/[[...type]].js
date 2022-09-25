@@ -5,7 +5,7 @@ import ContentTypes from "../../../../utils/content-types"
 import tags from "../../../../utils/tags";
 import SelectedTags from "../../../../utils/selected-tags";
 
-export default async(req, res)=>{
+const response = async(req, res)=>{
 
     const {method}=req;
     await connectDbMongo();
@@ -80,3 +80,5 @@ export default async(req, res)=>{
         }
     }
 }
+
+export default response;

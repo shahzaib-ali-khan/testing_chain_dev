@@ -3,7 +3,7 @@ import Playlist from "../../../../models/Playlist";
 import validateToken from "../../../../utils/validate-token";
 
 
-export default async(req,res)=>{
+const response = async(req,res)=>{
     const {method}=req;
     await connectDbMongo();
 
@@ -46,3 +46,5 @@ export default async(req,res)=>{
                     break;
     }
 }
+
+export default response;

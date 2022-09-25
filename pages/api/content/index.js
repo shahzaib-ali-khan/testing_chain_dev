@@ -4,7 +4,7 @@ import random_sk from "../../../utils/generate-random-sk";
 import calculatePositionNo from "../../../utils/calculate-position-no";
 
 
-export default async(req,res)=>{
+const response = async(req,res)=>{
     const {method}=req;
     await connectDbMongo();
 
@@ -64,3 +64,5 @@ export default async(req,res)=>{
                     break;
     }
 }
+
+export default response;

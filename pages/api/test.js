@@ -2,6 +2,8 @@ import connectDbMongo  from "../../utils/connectDbMongo";
 
 connectDbMongo();
 
-export default async(req,res)=>{
+const response = async(req,res)=>{
     res.json({test:'test'});
 }
+
+export default response;

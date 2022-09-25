@@ -1,7 +1,7 @@
 import connectDbMongo from "../../../../utils/connectDbMongo";
 import Tweet from "../../../../models/Tweet";
 
-export default async(req, res)=>{
+const response = async(req, res)=>{
     const {method}=req;
     await connectDbMongo();
 
@@ -17,3 +17,5 @@ export default async(req, res)=>{
     }
 
 }
+
+export default response;

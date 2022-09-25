@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+const response = async function handler(req, res) {
   res.setPreviewData(
     {},
     {
@@ -7,3 +7,5 @@ export default async function handler(req, res) {
   );
   res.end();
 }
+
+export default response;

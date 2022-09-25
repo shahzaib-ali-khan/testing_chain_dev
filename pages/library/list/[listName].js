@@ -3,6 +3,7 @@ import contentLists from "../../../utils/content-lists";
 import fetcher from "../../../utils/fetcher";
 import defineTitle from "../../../utils/define-title";
 import { Container } from "../../../components/layout";
+import { loadContentList } from "../../../lib/load-content-list";
 
 const PublicationsComponent = dynamic(() =>
   import("../../../components/publications")
@@ -21,9 +22,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const data = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/lists/${params.listName}`
-  );
+  
+  const data = await loadContentList(params);
 
   const title = defineTitle(params.listName);
 

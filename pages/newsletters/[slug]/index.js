@@ -1,6 +1,8 @@
 import fetcher from '../../../utils/fetcher';
 import { Container } from '../../../components/layout';
 import markdownToHtml from '../../../utils/markdown';
+import { loadNewsletter } from "../../../lib/load-newsletter";
+
 export async function getStaticPaths() {
   const response = await fetcher(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`
@@ -19,7 +21,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetcher(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`);
+  
+  const res = await loadNewsletter();
 
   let content = {};
 

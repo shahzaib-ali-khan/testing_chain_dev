@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 
 const KEY = "ghjsgdagfzdugfdhfljdshfidsufsd"
 
-export default async(req,res)=>{
+const response = async(req,res)=>{
     const {method}=req;
     await connectDbMongo();
 
@@ -25,3 +25,5 @@ export default async(req,res)=>{
     }
   }
 }
+
+export default response;

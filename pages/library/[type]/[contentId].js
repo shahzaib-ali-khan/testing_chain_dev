@@ -4,6 +4,7 @@ import findTags from "../../../utils/find-tags";
 import defineTitle from "../../../utils/define-title";
 import { Container } from "../../../components/layout";
 import dynamic from "next/dynamic";
+import { loadType } from "../../../lib/load-type";
 
 const PublicationsComponent = dynamic(() =>
   import("../../../components/publications")
@@ -40,9 +41,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const data = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/${params.type}`
-  );
+  
+  const data = await loadType(params);
 
   const title = defineTitle(params.type);
   let pageTitle = "";

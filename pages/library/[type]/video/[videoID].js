@@ -1,6 +1,7 @@
 import fetcher from "../../../../utils/fetcher";
 import { Container } from "../../../../components/layout";
 import dynamic from "next/dynamic";
+import { loadVideo } from "../../../../lib/load-video";
 
 const Player = dynamic(() => import("../../../../components/videos/player"));
 
@@ -36,9 +37,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const data = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/${params.type}/${params.videoID}`
-  );
+  
+  const data = await loadVideo(params)
 
   return {
     props: { data },

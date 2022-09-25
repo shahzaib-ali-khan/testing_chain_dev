@@ -1,5 +1,5 @@
 {
-  "name": "soldev-ui",
+  "name": "bnb-chain-dev",
   "version": "0.1.0",
   "dependencies": {
     "@web3-react/injected-connector": "^6.0.7",

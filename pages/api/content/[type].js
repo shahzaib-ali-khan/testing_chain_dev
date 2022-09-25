@@ -2,7 +2,7 @@ import connectDbMongo from "../../../utils/connectDbMongo";
 import Content from "../../../models/Content";
 
 
-export default async(req,res)=>{
+const response = async(req,res)=>{
     const {method}=req;
     await connectDbMongo();
     var contents;
@@ -18,3 +18,5 @@ export default async(req,res)=>{
         res.status(400).json({success: false});
     }
 }
+
+export default response;
