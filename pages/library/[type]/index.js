@@ -39,7 +39,7 @@ export async function getStaticPaths() {
   return { paths, fallback: "blocking" };
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const data = await fetcher(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/${context.params.type}`
   );

@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' };
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const res = await fetcher(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`);
 
   let content = {};

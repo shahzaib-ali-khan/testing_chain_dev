@@ -5,7 +5,7 @@ import { Container } from '../../components/layout';
 const Sidebar = dynamic(() => import('../../components/sidebar'));
 const Tabs = dynamic(() => import('../../components/dashboard/tabs'));
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const newContent = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/specialtag/New`);
   const trendingContent = await fetch(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/specialtag/Hot`
