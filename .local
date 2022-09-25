@@ -1,6 +1,3 @@
-NEXT_PUBLIC_API_ENDPOINT=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
-NODE_ENV=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
-NEXT_PUBLIC_ALGOLIA_APP_ID=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
-NEXT_PUBLIC_ALGOLIA_API_KEY=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
-NEXT_PUBLIC_ALGOLIA_SOURCE_ID=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
- NEXT_AIRTABLE_URL=https://soldev.app/_next/data/0-B8EgRrgrJsAtR_9nOQ7/jobs.json
+NEXT_PUBLIC_API_ENDPOINT=https://localhost:3000/api
+NODE_ENV=development
+MONGODB_URI=mongodb+srv://bnb_chain:ThisIsForBnbChain@cluster0.nmbr74z.mongodb.net/bnbzyt7891234_chain?retryWrites=true&w=majority
