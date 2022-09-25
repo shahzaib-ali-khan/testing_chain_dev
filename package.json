@@ -51,7 +51,7 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev -p 8000",
     "fix": "fixpack",
     "lint": "next lint",
     "start": "next start",
