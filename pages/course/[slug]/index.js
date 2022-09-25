@@ -25,7 +25,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const fullPath = path.join(directory, `${params.slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 

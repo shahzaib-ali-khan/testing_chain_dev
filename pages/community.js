@@ -14,7 +14,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const tweets = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/tweets/pinned`);
   const latestNewsletter = await fetch(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`

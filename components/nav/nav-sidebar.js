@@ -37,13 +37,13 @@ const navigation = [
   },
   {
     name: 'Bounty Board',
-    href: 'https://www.bnbchainlabs.com/en',
+    href: 'https://bugcrowd.com/binance',
     icon: ClipboardCheckIcon,
     disabled: false
   },
   {
     name: 'Jobs',
-    href: 'https://www.binance.com/en/careers/job-openings',
+    href: 'https://bnbchain.org/en/careers',
     icon: BriefcaseIcon,
     disabled: false
   }
@@ -53,7 +53,8 @@ const special = [
   {
     name: 'BNB Chain Cookbook',
     href: 'https://docs.bnbchain.org',
-    disabled: false
+    disabled: false,
+    target: '_blank'
   },
   {
     name: 'BNB Chain Docs',
@@ -91,6 +92,7 @@ const categories = [
   {
     name: 'Podcasts',
     href: '/library/podcasts'
+    //https://open.spotify.com/show/7bXvS4uU7nUy3uYw0dwhwr
   },
   {
     name: 'AMAs',

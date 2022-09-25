@@ -4,7 +4,7 @@ import { Container } from "../../components/layout";
 
 const Playlists = dynamic(() => import("../../components/videos/playlists"));
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const playlists = await fetcher(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/playlists/bnb`
   );

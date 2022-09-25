@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 const PublicationsComponent = dynamic(() => import('../../components/publications'));
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const  response = await fetcher(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`
   );
