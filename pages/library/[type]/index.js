@@ -6,6 +6,7 @@ import { Container } from "../../../components/layout";
 import { loadContentTypes } from "../../../lib/load-content-types";
 import { loadPlaylist } from "../../../lib/load-playlist";
 import { loadContent } from "../../../lib/load-content";
+import  { loadLibraryContentType } from "../../../lib/return-library-content-type";
 
 const PublicationsComponent = dynamic(() =>
   import("../../../components/publications")
@@ -75,7 +76,7 @@ export default function Publications({ data, title, contentType, tags }) {
   const metaTags = {
     title: `BNBChainDev - ${title}`,
     description: pageDescription,
-    url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/library/${contentType}`,
+    url: loadLibraryContentType(),
     shouldIndex: true,
   };
 
