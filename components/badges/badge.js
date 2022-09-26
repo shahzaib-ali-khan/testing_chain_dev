@@ -17,6 +17,8 @@ export default function Badge({ text }) {
           text === "Hot" &&
             "bg-red-400 text-red-50 dark:bg-red-700 text-red-100",
           text === "Best" &&
+            "bg-blue-400 text-blue-50 dark:bg-blue-700 text-blue-100",
+          text === "Trending" &&
             "bg-blue-400 text-blue-50 dark:bg-blue-700 text-blue-100"
         )}
       >

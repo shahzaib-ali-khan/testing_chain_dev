@@ -1,7 +1,7 @@
 export default {
     level: ["Beginner", "Intermediate", "Expert"],
-    industry: ["DeFi", "Gaming", "Governance", "Mobile", "Security"],
-    protocols: ["Serum", "Metaplex", "Arweave", "BNBChainPay"],
+    industry: ["Dapp Development", "DeFi", "MetaFi", "GameFi", "SocialFi", "Governance", "NFTs", "Security", "Scaling"],
+    protocols: ["IPFS", "Arweave", "BNBChainPay"],
     language: [
         "Rust",
         "JavaScript",
@@ -9,10 +9,8 @@ export default {
         "Golang",
         "Python",
         "Java",
-        "Swift",
-        "CLI",
-        "Kotlin",
+        "Swift"
     ],
-    badge: ["New", "Hot", "Best", "Old"],
-    framework: ["Anchor", "Web3.js", "React.js", "Svelte", "Vue.js"],
+    badge: ["New", "Hot", "Best", "Old", "Trending", "Releases"],
+    framework: ["Truffle", "OpenZeppelin", "Hardhat", "Band Protocol", "Web3.js", "React.js", "Vue.js"],
 };

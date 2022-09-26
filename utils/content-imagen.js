@@ -6,11 +6,17 @@
 export default function defineImage(content) {
   if (content.Img) {
     return content.Img;
-  } else if (content.ContentType === 'threads') {
+  } else if (content.ContentType === 'newsletters') {
+    return '/newsletter.webp';
+  }else if (content.ContentType === 'threads') {
     return '/twitter-placeholder.webp';
   } else if (content.Url && content.Url.includes('twitter') && content.ContentType === 'podcasts') {
     return '/twitter-placeholder.webp';
-  }
+  } else if (content.ContentType === 'tutorials') {
+    return '/tutorials-placeholder.jpg';
+  } else if (content.ContentType === 'articles') {
+    return '/article-pana.svg';
+  } 
 
   return '/placeholder.webp';
 }

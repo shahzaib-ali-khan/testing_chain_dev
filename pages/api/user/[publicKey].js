@@ -1,7 +1,7 @@
 import connectDbMongo from "../../../utils/connectDbMongo";
 import User from "../../../models/User";
 
-const resposne = async(req,res)=>{
+const response = async(req,res)=>{
     const {method}=req;
     await connectDbMongo();
 

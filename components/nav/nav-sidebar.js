@@ -37,24 +37,28 @@ const navigation = [
   },
   {
     name: 'Bounty Board',
-    href: 'https://www.bnbchainlabs.com/en',
+    href: 'https://bugcrowd.com/binance',
     icon: ClipboardCheckIcon,
-    disabled: false
+    disabled: false,
+    rel: "noreferrer",
+    target: "_blank"
   },
   {
     name: 'Jobs',
-    href: 'https://www.binance.com/en/careers/job-openings',
+    href: 'https://www.bnbchain.org/en/careers',
     icon: BriefcaseIcon,
-    disabled: false
+    disabled: false,
+    rel: "noreferrer",
+    target: "_blank"
   }
 ];
 
 const special = [
-  {
+  /*{
     name: 'BNB Chain Cookbook',
     href: 'https://docs.bnbchain.org',
     disabled: false
-  },
+  },*/
   {
     name: 'BNB Chain Docs',
     href: 'https://docs.bnbchain.org/docs/bnbIntro',
@@ -66,16 +70,28 @@ const special = [
     disabled: false
   },
   {
-    name: 'SDKs and APIs',
-    href: 'https://github.com/orgs/bnb-chain/repositories',
+    name: 'BNB Chain Forum',
+    href: 'https://forum.bnbchain.org/',
+    disabled:false,
+  },
+  {
+    name: 'Explore Dapps',
+    href: 'https://dappbay.bnbchain.org/',
     disabled: false
-  }
+  },
+
 ];
 
 const specialLists = [
   {
     name: 'Getting Started',
     href: '/library/list/started'
+  },
+  {
+    name: 'SDKs & Frameworks',
+    href: '/library/sdk',
+    /*href: 'https://github.com/orgs/bnb-chain/repositories?q=sdk&type=all&language=&sort=',*/
+    disabled: false
   }
 ];
 
@@ -97,20 +113,21 @@ const categories = [
     href: 'https://www.bsc.news/category/ama'
   },
   {
-    name: 'Projects',
+    name: 'Dapp Development',
     href: '/library/projects'
   },
-  {
+  /*{
     name: 'SDKs & Frameworks',
     href: '/library/sdk'
-  },
+  },*/
   {
     name: 'Scaffolds',
     href: '/library/scaffolds'
   },
   {
     name: 'Tools',
-    href: '/library/tools'
+    href: 'https://nodereal.io/bnb-dev-tools'
+    /*'/library/tools'*/
   },
   {
     name: 'Implementations',
@@ -120,10 +137,10 @@ const categories = [
     name: 'Security',
     href: '/library/security'
   },
-  {
+  /*{
     name: 'Program Library',
     href: '/library/spl'
-  },
+  },*/
   {
     name: 'Twitter Threads',
     href: '/library/threads'
@@ -174,7 +191,8 @@ function NavSidebar({ closeMobileMenu }) {
       <div className="pb-4">
         {navigation.map(item => {
           return (
-            <Link href={item.href} passHref key={item.name}>
+            <Link href={item.href} passHref key={item.name} target={item.target}>
+              <a target={item.target} rel={item.rel}>
               <button
                 className={classNames(
                   item.name === current
@@ -189,6 +207,7 @@ function NavSidebar({ closeMobileMenu }) {
                 }}
                 aria-current={item.current ? 'page' : undefined}
                 disabled={item.disabled}
+                
               >
                 <item.icon
                   className={classNames(
@@ -200,6 +219,7 @@ function NavSidebar({ closeMobileMenu }) {
                 />
                 <span className="truncate">{item.name}</span>
               </button>
+              </a>
             </Link>
           );
         })}
@@ -319,7 +339,30 @@ function NavSidebar({ closeMobileMenu }) {
               if ((item.name === 'Submitted' || item.name === 'Inactive') && !isAdmin) {
                 return;
               }
-
+              if(item.name === 'Tools'){
+                return (
+                  <Link href={item.href} passHref key={item.name}>
+                    <a
+                  href={item.href}
+                  key={item.name}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => closeMobileMenu()}
+                  >
+                    <button
+                      onClick={() => closeMobileMenu()}
+                      className="group flex min-w-full cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-lg font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:text-sm"
+                    >
+                      <PaperClipIcon
+                        className="h-4 w-4 text-yellow-400 dark:text-yellow-500"
+                        aria-hidden="true"
+                      />
+                      <span className="truncate leading-6">{item.name}</span>
+                    </button>
+                    </a>
+                  </Link>
+                );
+              }
               return (
                 <Link href={item.href} passHref key={item.name}>
                   <button

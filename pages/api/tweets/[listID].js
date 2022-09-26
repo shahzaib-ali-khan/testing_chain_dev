@@ -17,4 +17,4 @@ const response = async(req,res)=>{
 
 }
 
-export default resposne;
+export default response;
