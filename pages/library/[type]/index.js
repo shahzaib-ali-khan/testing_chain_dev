@@ -4,19 +4,18 @@ import defineTitle from "../../../utils/define-title";
 import dynamic from "next/dynamic";
 import { Container } from "../../../components/layout";
 import { loadContentTypes } from "../../../lib/load-content-types";
-import {loadContent} from "../../../lib/load-content";
+import { loadPlaylist } from "../../../lib/load-playlist";
+import { loadContent } from "../../../lib/load-content";
 
 const PublicationsComponent = dynamic(() =>
   import("../../../components/publications")
 );
 
 export async function getStaticPaths() {
-  const contentTypes = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/types`
-  );
-  const playlists = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/playlists/bnb`
-  );
+
+  const contentTypes = await loadContentTypes();
+
+  const playlists = await loadPlaylist();
 
   const paths = [];
 

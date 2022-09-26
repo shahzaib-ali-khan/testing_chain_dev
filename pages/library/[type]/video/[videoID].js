@@ -2,20 +2,18 @@ import fetcher from "../../../../utils/fetcher";
 import { Container } from "../../../../components/layout";
 import dynamic from "next/dynamic";
 import { loadVideo } from "../../../../lib/load-video";
+import { loadPlaylist } from "../../../../lib/load-playlist";
+import { loadPlaylistVertical } from "../../../../lib/load-playlist-vertical";
 
 const Player = dynamic(() => import("../../../../components/videos/player"));
 
 export async function getStaticPaths() {
-  const data = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/playlists/bnb`
-  );
+  const data = await loadPlaylist()
 
   // Fetch playlist content
   let contentList = [];
   for await (let playlist of data) {
-    const content = await fetcher(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/${playlist.Vertical}/${playlist._id}`
-    );
+    const content = await loadPlaylistVertical(playlist);
 
     contentList.push(content);
   }

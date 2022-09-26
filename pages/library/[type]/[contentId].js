@@ -5,6 +5,8 @@ import defineTitle from "../../../utils/define-title";
 import { Container } from "../../../components/layout";
 import dynamic from "next/dynamic";
 import { loadType } from "../../../lib/load-type";
+import { loadContentTypes } from "../../../lib/load-content-types";
+import { loadTypeWithoutParam } from "../../../lib/load-type-without-param";
 
 const PublicationsComponent = dynamic(() =>
   import("../../../components/publications")
@@ -12,15 +14,12 @@ const PublicationsComponent = dynamic(() =>
 const CardModal = dynamic(() => import("../../../components/card/card-modal"));
 
 export async function getStaticPaths() {
-  const contentTypes = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/types`
-  );
+
+  const contentTypes = await loadContentTypes();
 
   let data = [];
   for await (const type of contentTypes) {
-    const response = await fetcher(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/${type}`
-    );
+    const response = await loadTypeWithoutParam(type);
 
     data.push(response);
   }

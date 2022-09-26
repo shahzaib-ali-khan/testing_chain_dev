@@ -4,9 +4,7 @@ import markdownToHtml from '../../../utils/markdown';
 import { loadNewsletter } from "../../../lib/load-newsletter";
 
 export async function getStaticPaths() {
-  const response = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content/bnb/newsletters`
-  );
+  const response = await loadNewsletter();
 
   const paths = response.map(content => {
     return {

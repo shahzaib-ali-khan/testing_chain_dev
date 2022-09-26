@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: 'http://localhost:8000',
+  siteUrl: process.env.HOME_URL,
   basePath: "/library",
   generateRobotsTxt: true // (optional)
   // ...other options
