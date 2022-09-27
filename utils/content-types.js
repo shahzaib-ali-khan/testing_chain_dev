@@ -8,6 +8,5 @@ export default [
     "tools",
     "implementations",
     "security",
-    "spl",
     "threads",
 ];
