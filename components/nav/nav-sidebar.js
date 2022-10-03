@@ -85,7 +85,8 @@ const special = [
 const specialLists = [
   {
     name: 'Getting Started',
-    href: '/library/list/started'
+    href: 'https://docs.bnbchain.org/docs/getting-started/',
+    /*'/library/list/started'*/
   },
   {
     name: 'SDKs & Frameworks',
