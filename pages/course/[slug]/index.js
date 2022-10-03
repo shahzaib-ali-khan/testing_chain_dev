@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true
+    fallback: "blocking"
   };
 }
 
@@ -58,7 +58,7 @@ export default function CourseContent({ content }) {
   const metaTags = {
     title: `BNBChainDev - ${content.title}`,
     description: content.description,
-    url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/newsletters/${content.id}`,
+    url: `${process.env.HOME_URL}//newsletters/${content.id}`,
     shouldIndex: true
   };
 

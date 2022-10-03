@@ -37,6 +37,7 @@ export default function CardCompanies({
             src={logo}
             height="100"
             width="225px"
+            alt=""
           />
         </div>
 

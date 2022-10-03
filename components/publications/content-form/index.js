@@ -36,6 +36,9 @@ function ContentForm({
 
     await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`, {
       method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
       body: JSON.stringify({
         ...content,
       }),
@@ -66,6 +69,9 @@ function ContentForm({
 
     await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`, {
       method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
       body: JSON.stringify([{ ...data }]),
     });
 

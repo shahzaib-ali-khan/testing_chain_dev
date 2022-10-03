@@ -36,7 +36,7 @@ export async function getStaticPaths() {
   });
 
   // All missing paths are going to be server-side rendered and cached
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
@@ -90,7 +90,7 @@ export default function LibraryContent({
   const metaTags = {
     title: pageTitle,
     description: pageDescription,
-    url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/library/${contentType}/${selectedContent.ID}`,
+    url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/library/${contentType}/${selectedContent._id}`,
     shouldIndex: true,
     img: selectedContent.Img,
   };

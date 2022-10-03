@@ -6,7 +6,10 @@
  */
 export default function defineTitle(contentType, data = []) {
   if (contentType === "playlist") {
-    return data[0].Title;
+    if(data.length > 0){
+      return data[0].Title;  
+    }
+    return "";  
   } else if (contentType === "threads") {
     return "Twitter Threads";
   } else if (contentType === "spl") {

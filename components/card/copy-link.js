@@ -10,11 +10,11 @@ function CopyLink({ content }) {
 
   let url = '';
   if (content.ContentType === 'Playlist') {
-    url = `${process.env.HOME_URL}/library/${content.PlaylistID}/video/${content.SK}`;
-  } else if (content.ContentType === 'newsletters') {
-    url = `${process.env.HOME_URL}/newsletters/${content.SK}`;
+    url = `${process.env.HOME_URL}/library/${content?.PlaylistID}/video/${content?.SK}`;
+  } else if (content?.ContentType === 'newsletters') {
+    url = `${process.env.HOME_URL}/newsletters/${content?.SK}`;
   } else {
-    url = `${process.env.HOME_URL}/library/${content.ContentType}/${content.SK}`;
+    url = `${process.env.HOME_URL}/library/${content?.ContentType}/${content?.SK}`;
   }
 
   return (
@@ -23,7 +23,7 @@ function CopyLink({ content }) {
         type="button"
         className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-400 dark:text-gray-300 dark:hover:text-gray-500"
         onClick={() => {
-          navigator.clipboard.writeText(url);
+          navigator.clipboard.writeText(url?url : "");
           setShowNotification(true);
         }}
       >
