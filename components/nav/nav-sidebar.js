@@ -14,6 +14,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { memo, useEffect, useState } from 'react';
 import useUser from '../../hooks/useUser';
+import fetch from "../../utils/fetcher";
 
 const navigation = [
   {
@@ -177,15 +178,25 @@ function classNames(...classes) {
 
 function NavSidebar({ closeMobileMenu }) {
   const [current, setCurrent] = useState('');
-  const { user, isAdmin = false, connected, error } = useUser();
+  const [isAdmin, setisAdmin] = useState(false);
+  const { user, isAdmin_ = true, connected, error } = useUser();
+
 
   useEffect(() => {
+
+    const fetchData = async () => {
+      const data = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${window.sessionStorage.getItem('PublicKey')}`);
+      const admin = data?.Role === "admin" ? true : false;
+      setisAdmin(admin);
+    }
+    
+    fetchData().catch("Catch error " ,console.error);
     if (window && window.sessionStorage.getItem('main-navigation')) {
       setCurrent(window.sessionStorage.getItem('main-navigation'));
     } else {
       setCurrent('Library');
     }
-  }, []);
+  }, [isAdmin]);
 
   return (
     <nav aria-label="Sidebar" className="top-4 divide-y divide-gray-300 dark:divide-gray-500">

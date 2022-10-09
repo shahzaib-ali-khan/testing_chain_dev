@@ -1,11 +1,16 @@
 import useSWR from "swr";
 import fetcher from "../utils/fetcher";
-import { useWallet } from "@solana/wallet-adapter-react";
+//import { useWallet } from "@solana/wallet-adapter-react";
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
 
-export default function useUser() {
-  const { publicKey, connected } = useWallet();
+
+export default function useUser(publicKey, connected) {
+
+  const publicKey_ = publicKey?.toLowerCase();
   let { data, error } = useSWR(
-    connected && `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${publicKey}`,
+    connected && `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${publicKey_}`,
     fetcher
   );
 

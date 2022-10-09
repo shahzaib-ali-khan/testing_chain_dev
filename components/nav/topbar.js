@@ -18,6 +18,23 @@ import { useAppDispatch, useAppState } from '../../context/AppContext';
 import useTheme from '../../hooks/useTheme';
 import useUser from '../../hooks/useUser';
 import { useRouter } from 'next/router';
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+//import { useState } from "react"; // storing data in the state
+import { ethers } from "ethers"; // interacting with wallet
+
+/*
+const provider_options = {
+
+}
+
+if(typeof window !== "undefined"){
+const web3modal = new Web3Modal({
+  network: 'mainnet',
+  cacheProvider: 'true',
+  provider_options
+})
+}*/
 
 const Search = dynamic(() => import('./search'));
 const NavSidebar = dynamic(() => import('./nav-sidebar'));
@@ -27,13 +44,42 @@ function classNames(...classes) {
 }
 
 function TopBar({ setSearch }) {
-  const { isAdmin = false, connected } = useUser();
+  
+  const [publicKey, setPublickey] = useState();
+  //const [isAdmin, setisAdmin] = useState();
+  const [connected, setConnected] = useState(false);
+  const [network, setNetwork] = useState();
+  const [chainId, setChainId] = useState();
+  const { user, isAdmin = false, connected_, error } = useUser(publicKey, connected);
+
   const [editModeNotificationOn, setEditModeNotificationOn] = useState(false);
   const [editModeNotificationOff, setEditModeNotificationOff] = useState(false);
   let { mode, setSetting } = useTheme();
   const appDispatch = useAppDispatch();
   const appState = useAppState();
   const router = useRouter();
+
+  const connectButton = async () => {
+    const { ethereum } = window;
+
+    if (ethereum.isMetaMask) {
+      const provider = new ethers.providers.Web3Provider(ethereum, "any");
+      const accounts = await provider.send("eth_requestAccounts", []);
+  
+      const { name, chainId } = await provider.getNetwork();
+  
+      setNetwork(name);
+      setChainId(chainId);
+      setPublickey(accounts[0]);
+      setConnected(true);
+      window.sessionStorage.setItem("PublicKey", accounts[0]);
+      //setisAdmin(true);
+
+    } else {
+      setConnected(false);
+      setMsg("Install MetaMask");
+    }
+  };
 
   // Change edit mode state send notification
   const onEditMode = () => {
@@ -73,10 +119,10 @@ function TopBar({ setSearch }) {
                   <Link href="/" passHref>
                     <a className="flex content-center">
                       {mode === 'light' && (
-                        <Image src="/logowhite-2.svg" alt="SolDev Logo" height="50" width="120" />
+                        <Image src="/logowhite-2.svg" alt="BNBChainDev Logo" height="50" width="120" />
                       )}
                       {mode === 'dark' && (
-                        <Image src="/logowhite.svg" alt="SolDev Logo" height="50" width="120" />
+                        <Image src="/logowhite.svg" alt="BNBChainDev Logo" height="50" width="120" />
                       )}
                     </a>
                   </Link>
@@ -151,7 +197,7 @@ function TopBar({ setSearch }) {
                             <span className="sr-only">Open user menu</span>
                             <Image
                               className="rounded-full"
-                              src="/avatar.svg"
+                              src="/logowhite-2.svg"
                               height="32px"
                               width="32px"
                               alt="avatar"
@@ -194,7 +240,24 @@ function TopBar({ setSearch }) {
                             )}
                             <Menu.Item>
                               {({ active }) => (
-                                <WalletDisconnectButton className="wallet-disconnect-btn" />
+                                <button className={classNames(
+                                  active && 'bg-gray-100 hover:opacity-80 dark:bg-gray-700',
+                                  'text-md block flex w-full px-4 py-2 text-gray-700 dark:text-gray-300'
+                                )} onClick={
+                                  async()=>{
+                                    setChainId(null);
+                                    setPublickey(null);
+                                    setConnected(false);
+                                  }
+                                }>
+                                  <CogIcon
+                                      className="block h-7 w-7 text-gray-700 dark:text-gray-300"
+                                      aria-hidden="true"
+                                    />
+                                    <span>Disconnect Wallet</span>
+                                </button>
+                                
+                                /*<WalletDisconnectButton className="wallet-disconnect-btn" />*/
                               )}
                             </Menu.Item>
                           </Menu.Items> 
@@ -202,7 +265,25 @@ function TopBar({ setSearch }) {
                       </Menu>
                     ) : (
                       <div className="items-center">
-                        <WalletMultiButton className="wallet-multi-btn" />
+                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="connectButton" onClick={
+                          connectButton
+                          /*async () => {  // Check if MetaMask is installed on user's browser
+                          if(window.ethereum) {    
+                            const accounts = await window.ethereum.request({ method: 'eth_accounts' });    
+                            const chainId = await window.ethereum.request({ method: 'eth_chainId'});    // Check if user is connected to Mainnet
+                            if(chainId != '0x61') {
+                              alert("Please connect to BSC Testnet");
+                            } 
+                            else {
+                              let wallet = accounts[0];
+                              console.log("Wallet", wallet);
+                              //setWalletAddress(wallet);
+                            }  
+                          } else {
+                            alert("Please install Mask");
+                          }}*/
+                        }>Connect</button>
+                        {/*<WalletMultiButton className="wallet-multi-btn" />*/}
                       </div>
                     )}
                   </div>
