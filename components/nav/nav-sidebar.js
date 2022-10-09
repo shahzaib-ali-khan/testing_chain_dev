@@ -73,7 +73,7 @@ const special = [
   {
     name: 'BNB Chain Forum',
     href: 'https://forum.bnbchain.org/',
-    disabled:false,
+    disabled: false,
   },
   {
     name: 'Explore Dapps',
@@ -176,27 +176,34 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function NavSidebar({ closeMobileMenu }) {
+
+function NavSidebar({ closeMobileMenu, showButton = 0, publicKey }) {
   const [current, setCurrent] = useState('');
   const [isAdmin, setisAdmin] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(showButton);
   const { user, isAdmin_ = true, connected, error } = useUser();
 
 
   useEffect(() => {
 
     const fetchData = async () => {
-      const data = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${window.sessionStorage.getItem('PublicKey')}`);
+      // const data = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${window.sessionStorage.getItem('PublicKey')}`);
+      const data = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/${publicKey}`);
       const admin = data?.Role === "admin" ? true : false;
       setisAdmin(admin);
+
     }
-    
-    fetchData().catch("Catch error " ,console.error);
+
+    fetchData().catch("Catch error ", console.error);
     if (window && window.sessionStorage.getItem('main-navigation')) {
       setCurrent(window.sessionStorage.getItem('main-navigation'));
     } else {
       setCurrent('Library');
     }
-  }, [isAdmin]);
+    setButtonsVisible(showButton)
+
+
+  }, [showButton]);
 
   return (
     <nav aria-label="Sidebar" className="top-4 divide-y divide-gray-300 dark:divide-gray-500">
@@ -205,32 +212,32 @@ function NavSidebar({ closeMobileMenu }) {
           return (
             <Link href={item.href} passHref key={item.name} target={item.target}>
               <a target={item.target} rel={item.rel}>
-              <button
-                className={classNames(
-                  item.name === current
-                    ? 'bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-200'
-                    : 'text-gray-800 dark:text-gray-300',
-                  'group flex min-w-full max-w-[190px] items-center rounded-md px-3 py-2 text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 lg:text-sm'
-                )}
-                onClick={() => {
-                  setCurrent(item.name);
-                  window.sessionStorage.setItem('main-navigation', item.name);
-                  closeMobileMenu();
-                }}
-                aria-current={item.current ? 'page' : undefined}
-                disabled={item.disabled}
-                
-              >
-                <item.icon
+                <button
                   className={classNames(
-                    item.name === current ? 'text-gray-500' : 'text-yellow-400 ',
-                    '-ml-1 mr-3 h-6 w-6 flex-shrink-0',
-                    !item.disabled && 'group-hover:text-gray-500'
+                    item.name === current
+                      ? 'bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-200'
+                      : 'text-gray-800 dark:text-gray-300',
+                    'group flex min-w-full max-w-[190px] items-center rounded-md px-3 py-2 text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 lg:text-sm'
                   )}
-                  aria-hidden="true"
-                />
-                <span className="truncate">{item.name}</span>
-              </button>
+                  onClick={() => {
+                    setCurrent(item.name);
+                    window.sessionStorage.setItem('main-navigation', item.name);
+                    closeMobileMenu();
+                  }}
+                  aria-current={item.current ? 'page' : undefined}
+                  disabled={item.disabled}
+
+                >
+                  <item.icon
+                    className={classNames(
+                      item.name === current ? 'text-gray-500' : 'text-yellow-400 ',
+                      '-ml-1 mr-3 h-6 w-6 flex-shrink-0',
+                      !item.disabled && 'group-hover:text-gray-500'
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="truncate">{item.name}</span>
+                </button>
               </a>
             </Link>
           );
@@ -348,29 +355,30 @@ function NavSidebar({ closeMobileMenu }) {
           </p>
           <div className="mt-2 space-y-1" aria-labelledby="communities-headline">
             {categories.map(item => {
-              if ((item.name === 'Submitted' || item.name === 'Inactive') && !isAdmin) {
+              if ((item.name === 'Submitted' || item.name === 'Inactive') && isAdmin == false) {
                 return;
               }
-              if(item.name === 'Tools'){
+
+              if (item.name === 'Tools') {
                 return (
                   <Link href={item.href} passHref key={item.name}>
                     <a
-                  href={item.href}
-                  key={item.name}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => closeMobileMenu()}
-                  >
-                    <button
+                      href={item.href}
+                      key={item.name}
+                      target="_blank"
+                      rel="noreferrer"
                       onClick={() => closeMobileMenu()}
-                      className="group flex min-w-full cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-lg font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:text-sm"
                     >
-                      <PaperClipIcon
-                        className="h-4 w-4 text-yellow-400 dark:text-yellow-500"
-                        aria-hidden="true"
-                      />
-                      <span className="truncate leading-6">{item.name}</span>
-                    </button>
+                      <button
+                        onClick={() => closeMobileMenu()}
+                        className="group flex min-w-full cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-lg font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300 lg:text-sm"
+                      >
+                        <PaperClipIcon
+                          className="h-4 w-4 text-yellow-400 dark:text-yellow-500"
+                          aria-hidden="true"
+                        />
+                        <span className="truncate leading-6">{item.name}</span>
+                      </button>
                     </a>
                   </Link>
                 );
@@ -398,7 +406,7 @@ function NavSidebar({ closeMobileMenu }) {
 }
 
 NavSidebar.defaultProps = {
-  closeMobileMenu: () => {}
+  closeMobileMenu: () => { }
 };
 
 NavSidebar.prototype = {
