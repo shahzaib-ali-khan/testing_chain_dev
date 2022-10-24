@@ -5,5 +5,4 @@ const config = {
   generateRobotsTxt: true // (optional)
   // ...other options
 };
-module.exports = config;
-
+module.exports = { ...config };
