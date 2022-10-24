@@ -1,9 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-    siteUrl: process.env.SITE_URL,
-    basePath: "/library",
+    siteUrl: 'https://main.d1aos5rwqljdla.amplifyapp.com',
     generateRobotsTxt: true // (optional)
     // ...other options
   };
   
-  module.exports = { ...config };
+export default config;
