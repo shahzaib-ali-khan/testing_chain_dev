@@ -3,11 +3,6 @@
  */
  const { withPlausibleProxy } = require('next-plausible');
  const moduleExports = withPlausibleProxy()({
-  experimental: {
-    scrollRestoration: true,
-    legacyBrowsers: false,
-    images: { allowFutureImage: true }
-  },
   env:{
     HOME_URL: process.env.SITE_URL,
   },
