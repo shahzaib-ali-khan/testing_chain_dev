@@ -1,3 +1,3 @@
-NEXT_PUBLIC_API_ENDPOINT=https://localhost:3000/api
+NEXT_PUBLIC_API_ENDPOINT=
 NODE_ENV=development
-MONGODB_URI=mongodb+srv://bnb_chain:ThisIsForBnbChain@cluster0.nmbr74z.mongodb.net/bnbzyt7891234_chain?retryWrites=true&w=majority
+MONGODB_URI=
