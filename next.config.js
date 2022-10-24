@@ -1,8 +1,8 @@
 /**
  * @type {import('next').NextConfig}
  */
- const { withPlaiceholder } = require("@plaiceholder/next");
- const moduleExports = withPlaiceholder({
+ const { withPlausibleProxy } = require('next-plausible');
+ const moduleExports = withPlausibleProxy()({
   env:{
     HOME_URL: process.env.SITE_URL,
   },
