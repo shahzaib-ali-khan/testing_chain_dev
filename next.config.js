@@ -1,12 +1,10 @@
 /**
  * @type {import('next').NextConfig}
  */
-const { withPlausibleProxy } = require('next-plausible');
-const moduleExports = withPlausibleProxy()({
+ const { withPlaiceholder } = require("@plaiceholder/next");
+ const moduleExports = withPlaiceholder({
   env:{
     HOME_URL: process.env.SITE_URL,
-    basePath: "/library",
-    siteUrl: process.env.HOME_URL,
   },
   swcMinify: true,
   reactStrictMode: true,
