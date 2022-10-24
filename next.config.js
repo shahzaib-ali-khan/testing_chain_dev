@@ -3,7 +3,11 @@
  */
 const { withPlausibleProxy } = require('next-plausible');
 const moduleExports = withPlausibleProxy()({
-
+  env:{
+    HOME_URL: process.env.SITE_URL,
+    basePath: "/library",
+    siteUrl: process.env.HOME_URL,
+  },
   swcMinify: true,
   reactStrictMode: true,
   images: {
