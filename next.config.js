@@ -4,7 +4,7 @@
 const { withPlausibleProxy } = require('next-plausible');
 const moduleExports = withPlausibleProxy()({
   env:{
-    HOME_URL:"https://main.d1aos5rwqljdla.amplifyapp.com",
+    HOME_URL: process.env.SITE_URL,
   },
   swcMinify: true,
   reactStrictMode: true,
